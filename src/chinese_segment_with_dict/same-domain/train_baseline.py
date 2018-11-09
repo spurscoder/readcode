@@ -10,7 +10,7 @@ import numpy as np
 from config import *
 from utils_data import *
 from utils import *
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split        # train_test_split
 
 tf.flags.DEFINE_string('dataset','pku',"Dataset for evaluation")
 tf.flags.DEFINE_string("model_path", 'baseline', "The filename of model path")
