@@ -12,12 +12,13 @@ from utils_data import *
 from utils import *
 from sklearn.model_selection import train_test_split        # train_test_split
 
+# platform/flags.py中定义了如下内容，其实只是封装了absl库而已。
 tf.flags.DEFINE_string('dataset','pku',"Dataset for evaluation")
 tf.flags.DEFINE_string("model_path", 'baseline', "The filename of model path")
 tf.flags.DEFINE_float("memory",1.0,"Allowing GPU memory growth")
 tf.flags.DEFINE_bool('is_train',True,"Train or predict")
 tf.flags.DEFINE_integer('min_bg_freq',0,'The mininum bigram_words frequency')
-FLAGS = tf.flags.FLAGS
+FLAGS = tf.flags.FLAGS      # 实际上是一个dict
 
 train_data_path=FLAGS.dataset+'_train'
 dev_data_path=FLAGS.dataset+'_dev'
