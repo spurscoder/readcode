@@ -24,7 +24,7 @@ train_data_path=FLAGS.dataset+'_train'
 dev_data_path=FLAGS.dataset+'_dev'
 test_data_path=FLAGS.dataset+'_test'
 bigram_words_path=FLAGS.dataset+'_train_bigram'
-config=BaselineConfig
+config=BaselineConfig           # 来自于config.py文件的class
 
 if FLAGS.dataset == 'pku':
     config.hidden_dim = 64
@@ -34,7 +34,9 @@ if FLAGS.dataset == 'as' or FLAGS.dataset=='cityu':
     FLAGS.domain = 'dict_2'
 
 def train():
-    word2id = get_word2id(train_data_path,bigram_words=bigram_words_path,min_bw_frequence=FLAGS.min_bg_freq)
+    word2id = get_word2id(train_data_path,\
+                            bigram_words=bigram_words_path,
+                            min_bw_frequence=FLAGS.min_bg_freq)
     X_train,y_train=get_train_data(train_data_path,word2id)
     X_valid,y_valid=get_train_data(dev_data_path,word2id)
     x_test, y_test = get_train_data(test_data_path, word2id)
@@ -52,7 +54,7 @@ def train():
     print 'len(test_data): %d' % len(x_test)
     print 'init_embedding shape: [%d,%d]' % (init_embedding.shape[0], init_embedding.shape[1])
     print 'Train started!'
-    tfConfig = tf.ConfigProto()
+    tfConfig = tf.ConfigProto()                     # google protobuf2
     tfConfig.gpu_options.per_process_gpu_memory_fraction = FLAGS.memory
     with tf.Session(config=tfConfig) as sess:
         model=models.BaselineModel(vocab_size=len(word2id),word_dim=config.word_dim,hidden_dim=config.hidden_dim,
@@ -63,13 +65,13 @@ def train():
         if not os.path.exists('checkpoints'):
             os.mkdir('checkpoints')
         checkpoints_model=os.path.join('checkpoints',FLAGS.model_path)
-        saver = tf.train.Saver(tf.all_variables())
+        saver = tf.train.Saver(tf.all_variables())              # defined in python.training.saver.py
 
         ckpt = tf.train.get_checkpoint_state(checkpoints_model)
         if ckpt and ckpt.model_checkpoint_path:
             print 'restore from original model!'
-            saver.restore(sess, ckpt.model_checkpoint_path)
         else:
+            saver.restore(sess, ckpt.model_checkpoint_path)
             sess.run(tf.global_variables_initializer())
 
         best_f1,best_e=0,0
