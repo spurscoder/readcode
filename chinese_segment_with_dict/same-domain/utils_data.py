@@ -77,6 +77,9 @@ def build_reverse_dictionary(word_to_id):
 
 #get model's inputs
 def get_train_data(filename=None,word2id=None,usebigram=True):
+    """
+    introduce this functions
+    """
     filename=os.path.join(DATA_PATH,filename)
     x,y=[],[]
     with codecs.open(filename,'r','utf-8') as f:
