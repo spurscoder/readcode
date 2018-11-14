@@ -89,7 +89,7 @@ def bigram_words(dataset,window_size=2):
     end=''.join([END]*window_size)
     with codecs.open(dataset,'r','utf-8') as f:
         for line in f:
-            line=start+re.sub('\s+','',line.strip())+end
+            line=start+re.sub('\s+','',line.strip())+end                #处理line
             for word in ngram(line,window_size):
                 words[word]=words.get(word,0)+1
     with codecs.open(dataset+'_bigram','w','utf-8') as f:

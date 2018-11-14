@@ -40,7 +40,6 @@ class CWS_Dict:
         ckpt = tf.train.get_checkpoint_state(model_cache)
         self.saver.restore(self.sess,ckpt.model_checkpoint_path)
 
-
     def _findNum(self,sentence):
         results=Queue.Queue()
         for item in re.finditer(rNUM,sentence):
@@ -52,10 +51,6 @@ class CWS_Dict:
         for item in re.finditer(rENG,sentence):
             results.put(item.group())
         return results
-
-
-
-
 
     def _preprocess(self,sentence):
         original_sentence=[]

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-
+"""
+这样方便处理参数类型，保存超参数
+"""
 class BaselineConfig:
     dropout_keep_prob = 0.8
     batch_size = 128

@@ -52,7 +52,7 @@ class BaselineModel(object):
         with tf.variable_scope('rnn'):
             if bi_direction:
                 print( 'bi_direction is true')
-                (forward_output,backword_output),_=tf.nn.bidirectional_dynamic_rnn(
+                (forward_output,backword_output),_=tf.nn.bidirectional_dynamic_rnn(     # rnn.bidirectional_dynamic_rnn
                     cell_fw=self.fw_multi_cell,
                     cell_bw=self.bw_multi_cell,
                     inputs=x,
@@ -63,7 +63,7 @@ class BaselineModel(object):
             else:
 
                 print( 'bi_direction is false')
-                forward_output,_=tf.nn.dynamic_rnn(
+                forward_output,_=tf.nn.dynamic_rnn(         # rnn.dynamic_rnn
                     cell=self.fw_multi_cell,
                     inputs=x,
                     sequence_length=self.seq_length,
